@@ -1,10 +1,14 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/*.js", "use": "@vercel/node" }
-  ],
+  "functions": {
+    "api/ws.js": {
+      "memory": 128
+    },
+    "api/telegram.js": {
+      "memory": 128
+    }
+  },
   "routes": [
-    { "src": "/ws", "dest": "/api/ws.js" },
-    { "src": "/telegram", "dest": "/api/telegram.js" }
+    { "src": "/api/(.*)", "dest": "/api/$1.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
